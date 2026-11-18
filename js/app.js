@@ -2,9 +2,17 @@
    App shell: routing, page transitions, home view, interactions.
    Routes are plain hashes (#jsw, #about) so every view is linkable.
    ========================================================================== */
-import { SITE, PROJECTS, CAPABILITIES, STRENGTHS, HATS, EXPERIENCE, EDUCATION, RECOGNITION } from './data.js';
+import { SITE, PROJECTS, CAPABILITIES, STRENGTHS, HATS, EXPERIENCE, EDUCATION, RECOGNITION, TICKER } from './data.js';
 import { CASES, JSW_SCREENS, MD_APPS } from './cases.js';
-import { img, lines, esc } from './ui.js';
+import { img, lines, esc, logo } from './ui.js';
+
+/** Endless logo ticker. The track is rendered twice; the copy is hidden from assistive tech. */
+function ticker() {
+  const run = (copy) => TICKER.map(g => `<li class="ticker__group"${copy ? ' aria-hidden="true"' : ''}><span class="ticker__label label">${g.label}</span>${g.items.map(n => `<span class="ticker__item">${logo(n, { decorative: copy })}</span>`).join('')}</li>`).join('');
+  return `<section class="ticker" data-tone="base" aria-label="Organisations I have worked with and studied at">
+    <div class="ticker__viewport"><ul class="ticker__track">${run(false)}${run(true)}</ul></div>
+  </section>`;
+}
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -79,6 +87,8 @@ function home() {
     <nav class="hero__index rv" style="--d:.75s" aria-label="Case studies index"><ol>${PROJECTS.map(p => `<li><a href="#${p.slug}"><span class="n">${p.num}</span><b>${p.name}</b><span class="d">${p.short}</span></a></li>`).join('')}</ol></nav>
   </section>
 
+  ${ticker()}
+
   <section class="work wrap" id="work" data-tone="base" aria-labelledby="work-h">
     <div class="grid s-intro">
       <p class="s-intro__label label">(01) Selected work</p>
@@ -120,7 +130,7 @@ function home() {
       <ol class="xp">
         ${EXPERIENCE.map(e => `<li class="xp__row rv">
           <div class="xp__when"><span class="mono">${e.period}</span><span class="hat-tag">${e.hat}</span></div>
-          <div class="xp__who"><h3>${e.org}</h3><p>${e.role}</p><span class="xp__place">${e.place}</span></div>
+          <div class="xp__who">${logo(e.org, { cls: 'xp__logo', scale: .8, decorative: true })}<h3>${e.org}</h3><p>${e.role}</p><span class="xp__place">${e.place}</span></div>
           <div class="xp__what">
             ${e.highlight ? `<p class="xp__hl"><span aria-hidden="true">★</span> ${e.highlight}</p>` : ''}
             <ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>
@@ -132,7 +142,7 @@ function home() {
       <div class="edu">
         <div class="edu__col">
           <p class="label">Education</p>
-          ${EDUCATION.map(e => `<div class="edu__item rv"><span class="mono">${e.period}</span><h3>${e.title}</h3><p>${e.field}</p><p class="muted">${e.school}</p>${e.slug ? `<a class="link-u" href="#${e.slug}">${e.link} →</a>` : ''}</div>`).join('')}
+          ${EDUCATION.map(e => `<div class="edu__item rv">${logo(e.school, { cls: 'edu__logo', scale: .9, decorative: true })}<span class="mono">${e.period}</span><h3>${e.title}</h3><p>${e.field}</p><p class="muted">${e.school}</p>${e.slug ? `<a class="link-u" href="#${e.slug}">${e.link} →</a>` : ''}</div>`).join('')}
         </div>
         <div class="edu__col">
           <p class="label">Recognition</p>

@@ -147,3 +147,34 @@ export const RECOGNITION = [
   'Game Design Workshop Facilitator, DY Patil',
   'Vh1 Supersonic, Installation Team',
 ];
+
+/* Logos (assets/logos/). `mono` = white artwork from the source site, rendered in ink.
+   `h` = optical height in px so wordmarks and badges read at a similar size. */
+export const LOGOS = {
+  'Dentsu Global Services': { src: 'dentsu.png', w: 304, h: 64, mono: true, size: 24 },
+  'NITO': { src: 'nito.png', w: 209, h: 138, size: 40 },
+  'BINCA': { src: 'binca.png', w: 300, h: 136, size: 38 },
+  'Clever Harvey': { src: 'clever-harvey.png', w: 175, h: 57, mono: true, size: 36 },
+  'Imagimake': { src: 'imagimake.png', w: 320, h: 221, size: 46 },
+  'Total Environment': { src: 'total-environment.svg', w: 738, h: 179, size: 50 },
+  'EXL': { src: 'exl.png', w: 334, h: 203, size: 46 },
+  'JSW': { src: 'jsw.png', w: 242, h: 135, size: 42 },
+  'Mother Dairy': { src: 'mother-dairy.png', w: 134, h: 74, size: 46 },
+  'National Institute of Design': { src: 'nid.png', w: 500, h: 80, mono: true, size: 38 },
+  'Symbiosis Institute of Design': { src: 'symbiosis.png', w: 442, h: 88, size: 34 },
+};
+
+export const TICKER = [
+  { label: 'Worked at', items: ['Dentsu Global Services', 'NITO', 'BINCA', 'Clever Harvey', 'Imagimake'] },
+  { label: 'Clients', items: ['Total Environment', 'EXL', 'JSW', 'Mother Dairy'] },
+  { label: 'Studied at', items: ['National Institute of Design', 'Symbiosis Institute of Design'] },
+];
+
+/* Logos shown at the top of each case study: [caption, LOGOS key]. */
+export const PROJECT_LOGOS = {
+  'total-environment': [['Client', 'Total Environment'], ['Delivered at', 'Dentsu Global Services']],
+  'exl': [['Client', 'EXL'], ['Delivered at', 'Dentsu Global Services']],
+  'jsw': [['Client', 'JSW'], ['Delivered at', 'Dentsu Global Services']],
+  'mother-dairy': [['Client', 'Mother Dairy'], ['Delivered at', 'Dentsu Global Services']],
+  'responsible-tourism': [['Institution', 'National Institute of Design']],
+};

@@ -980,3 +980,46 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 .zine__cover { grid-row: auto !important; }
 .zine { align-items: center; }
+
+/* ---------- 22. Logos: ticker, case-study brands, experience ---------- */
+img.logo { display: block; height: var(--lh); width: auto; max-width: none; object-fit: contain; }
+.logo--mono { filter: brightness(0); opacity: .86; }
+
+/* Endless ticker, full bleed between hero and work */
+.ticker { margin-top: clamp(56px, 7vw, 104px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+.ticker__viewport {
+  overflow: hidden; padding: clamp(22px, 2.6vw, 34px) 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.ticker__track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; animation: ticker 48s linear infinite; will-change: transform; }
+.ticker:hover .ticker__track, .ticker:focus-within .ticker__track { animation-play-state: paused; }
+.ticker__group { display: flex; align-items: center; gap: clamp(36px, 4.4vw, 68px); padding-right: clamp(36px, 4.4vw, 68px); flex: none; }
+.ticker__label { color: var(--muted); white-space: nowrap; padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: 100px; }
+.ticker__item { display: flex; align-items: center; height: 52px; flex: none; }
+.ticker__item .logo { filter: grayscale(1); opacity: .62; transition: filter .45s var(--ease), opacity .45s var(--ease), transform .45s var(--ease); }
+.ticker__item .logo--mono { filter: brightness(0); opacity: .62; }
+.ticker__item:hover .logo { filter: none; opacity: 1; transform: scale(1.06); }
+.ticker__item:hover .logo--mono { filter: brightness(0); }
+@keyframes ticker { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+@media (max-width: 640px) {
+  .ticker__item { height: 40px; }
+  .ticker__item img.logo { height: calc(var(--lh) * .78); }
+  .ticker__track { animation-duration: 36s; }
+}
+
+/* Case-study hero: client / studio logos on white cards (work on every theme) */
+.c-brands { display: flex; flex-wrap: wrap; gap: 12px 28px; margin: 24px 0 clamp(28px, 3vw, 44px); padding: 0; list-style: none; }
+.c-brand { display: flex; align-items: center; gap: 12px; }
+.c-brand .label { color: var(--muted); }
+.c-brand__card { display: inline-flex; align-items: center; justify-content: center; min-height: 64px; padding: 10px 18px; background: #fff; border-radius: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08); }
+
+/* Experience & education */
+.xp__logo, .edu__logo { margin-bottom: 14px; }
+.edu__logo { margin: 4px 0 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none !important; flex-wrap: wrap; justify-content: center; width: auto; row-gap: 20px; }
+  .ticker__group[aria-hidden="true"] { display: none; }
+  .ticker__viewport { -webkit-mask-image: none; mask-image: none; }
+}

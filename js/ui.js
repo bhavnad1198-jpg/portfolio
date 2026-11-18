@@ -1,5 +1,23 @@
 /* Reusable view components (pure functions → HTML strings). */
 import { DIMS } from './images.js';
+import { LOGOS, PROJECT_LOGOS } from './data.js';
+
+/** Organisation logo. `scale` multiplies the logo's optical height. */
+export function logo(name, { cls = '', scale = 1, decorative = false } = {}) {
+  const l = LOGOS[name];
+  if (!l) return '';
+  const h = Math.round(l.size * scale);
+  const w = Math.round(h * l.w / l.h);
+  return `<img class="logo${l.mono ? ' logo--mono' : ''}${cls ? ` ${cls}` : ''}" src="assets/logos/${l.src}" width="${w}" height="${h}" style="--lh:${h}px" alt="${decorative ? '' : esc(name)}" loading="lazy" decoding="async">`;
+}
+
+/** Client / studio logos at the top of a case study. */
+function brandRow(slug) {
+  const items = PROJECT_LOGOS[slug];
+  if (!items) return '';
+  return `<ul class="c-brands rv" aria-label="Organisations">${items.map(([cap, name]) =>
+    `<li class="c-brand"><span class="label">${cap}</span><span class="c-brand__card">${logo(name)}</span></li>`).join('')}</ul>`;
+}
 
 export const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -49,6 +67,7 @@ export function caseHero(p, { label, title, sum, meta, media, own, badge = '', t
   return `<header class="c-hero" data-tone="base">
     <div class="wrap">
       <nav class="c-hero__crumbs label" aria-label="Breadcrumb"><a href="#work">Work</a><span aria-hidden="true">/</span><span>${p.num}: ${p.name}</span></nav>
+      ${brandRow(p.slug)}
       <div class="grid c-hero__grid">
         <div class="c-hero__title">
           <span class="label label--accent">${label}</span>
