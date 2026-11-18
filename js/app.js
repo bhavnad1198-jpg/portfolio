@@ -130,7 +130,7 @@ function home() {
       <ol class="xp">
         ${EXPERIENCE.map(e => `<li class="xp__row rv">
           <div class="xp__when"><span class="mono">${e.period}</span><span class="hat-tag">${e.hat}</span></div>
-          <div class="xp__who">${logo(e.org, { cls: 'xp__logo', scale: .8, decorative: true })}<h3>${e.org}</h3><p>${e.role}</p><span class="xp__place">${e.place}</span></div>
+          <div class="xp__who"><h3>${e.org}</h3><p>${e.role}</p><span class="xp__place">${e.place}</span></div>
           <div class="xp__what">
             ${e.highlight ? `<p class="xp__hl"><span aria-hidden="true">★</span> ${e.highlight}</p>` : ''}
             <ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>
@@ -142,7 +142,7 @@ function home() {
       <div class="edu">
         <div class="edu__col">
           <p class="label">Education</p>
-          ${EDUCATION.map(e => `<div class="edu__item rv">${logo(e.school, { cls: 'edu__logo', scale: .9, decorative: true })}<span class="mono">${e.period}</span><h3>${e.title}</h3><p>${e.field}</p><p class="muted">${e.school}</p>${e.slug ? `<a class="link-u" href="#${e.slug}">${e.link} →</a>` : ''}</div>`).join('')}
+          ${EDUCATION.map(e => `<div class="edu__item rv"><span class="mono">${e.period}</span><h3>${e.title}</h3><p>${e.field}</p><p class="muted">${e.school}</p>${e.slug ? `<a class="link-u" href="#${e.slug}">${e.link} →</a>` : ''}</div>`).join('')}
         </div>
         <div class="edu__col">
           <p class="label">Recognition</p>

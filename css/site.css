@@ -1014,9 +1014,6 @@ img.logo { display: block; height: var(--lh); width: auto; max-width: none; obje
 .c-hero__logo-title { margin: 0; line-height: 0; }
 .c-hero__title > .c-hero__logo { margin-bottom: clamp(20px, 2.4vw, 32px); }
 
-/* Experience & education */
-.xp__logo, .edu__logo { margin-bottom: 14px; }
-.edu__logo { margin: 4px 0 10px; }
 
 @media (prefers-reduced-motion: reduce) {
   .ticker__track { animation: none !important; flex-wrap: wrap; justify-content: center; width: auto; row-gap: 20px; }

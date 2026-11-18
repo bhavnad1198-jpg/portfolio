@@ -22,8 +22,8 @@ const BASE = 'assets/img/';
 
 /** Responsive, lazy image with intrinsic size (prevents layout shift). */
 export function img(name, alt, { cls = '', sizes = '100vw', eager = false, style = '' } = {}) {
-  const [w, h, small] = DIMS[name] || [1600, 1000, 0];
-  const src = `${BASE}${name}.webp`;
+  const [w, h, small, ext = 'webp'] = DIMS[name] || [1600, 1000, 0];
+  const src = `${BASE}${name}.${ext}`;
   const srcset = small ? ` srcset="${BASE}${name}-900.webp 900w, ${src} ${w}w" sizes="${sizes}"` : '';
   return `<img src="${src}"${srcset} width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"${cls ? ` class="${cls}"` : ''}${style ? ` style="${style}"` : ''}>`;
 }
