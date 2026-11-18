@@ -7,6 +7,8 @@ export const SITE = {
   name: 'Bhavna Dehadray',
   role: 'Experience Designer',
   email: 'bhavna.d1198@gmail.com',
+  phone: '+91 82757 38016',
+  phoneHref: '+918275738016',
   // Add the full profile URL, e.g. 'https://www.linkedin.com/in/your-handle/'
   linkedin: 'https://www.linkedin.com/in/bhavna-dehadray-66395a18b/',
   // Put the PDF at this path. If the file is missing the button becomes "Request résumé".

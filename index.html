@@ -54,7 +54,6 @@
         <a href="#work" data-sec="work">Work</a>
         <a href="#about" data-sec="about">About</a>
         <a href="#experience" data-sec="experience">Experience</a>
-        <a href="#contact" data-sec="contact">Contact</a>
         <a href="#contact" class="nav__cta" data-resume>Résumé</a>
       </nav>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
@@ -95,6 +94,17 @@
     <div class="lb__bar"><span class="mono" data-lb-count></span><button type="button" class="circ" data-lb-close aria-label="Close image viewer">✕</button></div>
     <div class="lb__stage"><img alt=""></div>
     <div class="lb__cap"><span data-lb-cap></span><div class="lb__nav"><button type="button" class="circ" data-lb-prev aria-label="Previous image">←</button><button type="button" class="circ" data-lb-next aria-label="Next image">→</button></div></div>
+  </div>
+
+  <div class="fab" data-fab>
+    <div class="fab__panel" id="fab-panel" role="dialog" aria-label="Contact Bhavna" hidden>
+      <p class="fab__title">Get in touch</p>
+      <div class="fab__row"><span class="fab__label">Email</span><a class="fab__val" data-fab-email href="#"></a><button type="button" class="fab__copy" data-fab-copy="email" aria-label="Copy email address">Copy</button></div>
+      <div class="fab__row"><span class="fab__label">Phone</span><a class="fab__val" data-fab-phone href="#"></a><button type="button" class="fab__copy" data-fab-copy="phone" aria-label="Copy phone number">Copy</button></div>
+      <div class="fab__acts"><a class="fab__btn" data-fab-mail href="#" target="_blank" rel="noopener">Email me</a><a class="fab__btn fab__btn--ghost" data-fab-call href="#">Call</a></div>
+      <p class="fab__msg" data-fab-msg aria-live="polite"></p>
+    </div>
+    <button type="button" class="fab__toggle" aria-expanded="false" aria-controls="fab-panel"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="fab__txt">Contact</span></button>
   </div>
 
   <div class="curtain" aria-hidden="true"><span></span></div>

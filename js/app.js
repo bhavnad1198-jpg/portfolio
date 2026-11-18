@@ -463,9 +463,40 @@ function applyResume() {
   });
 }
 
+/* ---------------- Floating contact button ---------------- */
+function initFab() {
+  const root = $('[data-fab]'); if (!root) return;
+  const btn = $('.fab__toggle', root), panel = $('.fab__panel', root);
+  const em = $('[data-fab-email]', root), ph = $('[data-fab-phone]', root);
+  em.textContent = SITE.email; em.href = `mailto:${SITE.email}`;
+  ph.textContent = SITE.phone; ph.href = `tel:${SITE.phoneHref}`;
+  const touch = matchMedia('(pointer: coarse)').matches;
+  const msg = $('[data-fab-msg]', root);
+  const say = t => { msg.textContent = t; clearTimeout(say.t); say.t = setTimeout(() => (msg.textContent = ''), 4000); };
+  const copy = async v => { try { await navigator.clipboard.writeText(v); return true; } catch { return false; } };
+  const mail = $('[data-fab-mail]', root), call = $('[data-fab-call]', root);
+  // Phones: native mail app. Laptops: Gmail compose in a new tab (works without a desktop mail app).
+  mail.href = touch ? `mailto:${SITE.email}` : `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE.email)}`;
+  if (touch) mail.removeAttribute('target');
+  mail.addEventListener('click', async () => { if (await copy(SITE.email)) say(touch ? 'Opening your mail app. Email address copied too.' : 'Opening Gmail. Email address copied too, if you use another mail app.'); });
+  // Phones: dialler. Laptops can’t place calls, so copy the number instead.
+  call.href = `tel:${SITE.phoneHref}`;
+  // Laptops can’t place calls, and the phone row already has Copy, so show one action only.
+  if (!touch) { call.remove(); root.querySelector('.fab__acts').classList.add('fab__acts--one'); }
+  const set = open => { panel.hidden = !open; btn.setAttribute('aria-expanded', open); root.classList.toggle('is-open', open); };
+  btn.addEventListener('click', () => set(panel.hidden));
+  document.addEventListener('click', e => { if (!root.contains(e.target)) set(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+  $$('[data-fab-copy]', root).forEach(b => b.addEventListener('click', async () => {
+    const v = b.dataset.fabCopy === 'email' ? SITE.email : SITE.phone;
+    try { await navigator.clipboard.writeText(v); b.textContent = 'Copied'; } catch { b.textContent = 'Select it'; }
+    setTimeout(() => (b.textContent = 'Copy'), 1600);
+  }));
+}
+
 /* ---------------- Boot ---------------- */
 (async function boot() {
-  initChrome(); initLB();
+  initChrome(); initLB(); initFab();
   checkResume().then(() => { if (resumeOK && current === 'home') render('home'); });
   addEventListener('hashchange', () => { const h = location.hash.slice(1); if (parse(h).view !== current || parse(h).anchor) route(false, h); });
   await route(true);
