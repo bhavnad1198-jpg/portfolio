@@ -156,7 +156,7 @@ export const LOGOS = {
   'BINCA': { src: 'binca.png', w: 300, h: 136, size: 38 },
   'Clever Harvey': { src: 'clever-harvey.png', w: 175, h: 57, mono: true, size: 36 },
   'Imagimake': { src: 'imagimake.png', w: 320, h: 221, size: 46 },
-  'Total Environment': { src: 'total-environment.svg', w: 738, h: 179, size: 50 },
+  'Total Environment': { src: 'total-environment.png', w: 1484, h: 360, size: 50 },
   'EXL': { src: 'exl.png', w: 334, h: 203, size: 46 },
   'JSW': { src: 'jsw.png', w: 242, h: 135, size: 42 },
   'Mother Dairy': { src: 'mother-dairy.png', w: 134, h: 74, size: 46 },
@@ -170,11 +170,11 @@ export const TICKER = [
   { label: 'Studied at', items: ['National Institute of Design', 'Symbiosis Institute of Design'] },
 ];
 
-/* Logos shown at the top of each case study: [caption, LOGOS key]. */
-export const PROJECT_LOGOS = {
-  'total-environment': [['Client', 'Total Environment'], ['Delivered at', 'Dentsu Global Services']],
-  'exl': [['Client', 'EXL'], ['Delivered at', 'Dentsu Global Services']],
-  'jsw': [['Client', 'JSW'], ['Delivered at', 'Dentsu Global Services']],
-  'mother-dairy': [['Client', 'Mother Dairy'], ['Delivered at', 'Dentsu Global Services']],
-  'responsible-tourism': [['Institution', 'National Institute of Design']],
+/* Case-study hero logos (transparent PNGs). `replace`: the logo IS the title (h1 keeps the name as alt text).
+   Otherwise the logo sits above the existing headline. `h` = display height as a CSS length. */
+export const HERO_LOGOS = {
+  'total-environment': { name: 'Total Environment', src: 'total-environment.png', w: 1484, h: 360, replace: true, size: 'clamp(84px, 10vw, 150px)' },
+  'exl': { name: 'EXL', src: 'exl-mark.png', w: 300, h: 90, replace: true, size: 'clamp(84px, 11vw, 168px)' },
+  'jsw': { name: 'JSW', src: 'jsw-hero.png', w: 845, h: 400, replace: true, size: 'clamp(110px, 13vw, 200px)' },
+  'mother-dairy': { name: 'Mother Dairy', src: 'mother-dairy.png', w: 134, h: 74, replace: false, size: '74px' },
 };

@@ -1,6 +1,6 @@
 /* Reusable view components (pure functions → HTML strings). */
 import { DIMS } from './images.js';
-import { LOGOS, PROJECT_LOGOS } from './data.js';
+import { LOGOS, HERO_LOGOS } from './data.js';
 
 /** Organisation logo. `scale` multiplies the logo's optical height. */
 export function logo(name, { cls = '', scale = 1, decorative = false } = {}) {
@@ -11,12 +11,9 @@ export function logo(name, { cls = '', scale = 1, decorative = false } = {}) {
   return `<img class="logo${l.mono ? ' logo--mono' : ''}${cls ? ` ${cls}` : ''}" src="assets/logos/${l.src}" width="${w}" height="${h}" style="--lh:${h}px" alt="${decorative ? '' : esc(name)}" loading="lazy" decoding="async">`;
 }
 
-/** Client / studio logos at the top of a case study. */
-function brandRow(slug) {
-  const items = PROJECT_LOGOS[slug];
-  if (!items) return '';
-  return `<ul class="c-brands rv" aria-label="Organisations">${items.map(([cap, name]) =>
-    `<li class="c-brand"><span class="label">${cap}</span><span class="c-brand__card">${logo(name)}</span></li>`).join('')}</ul>`;
+/** Client logo for a case-study hero, revealed with the same masked rise as the headline. */
+function heroLogo(l, d = 0) {
+  return `<span class="rv-line c-hero__logo" style="--d:${d}s"><span><img src="assets/logos/${l.src}" width="${l.w}" height="${l.h}" style="--logo-h:${l.size}" alt="${l.replace ? esc(l.name) : ''}" fetchpriority="high" decoding="async"></span></span>`;
 }
 
 export const esc = (s = '') => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -64,15 +61,18 @@ export const chips = arr => `<div class="chips">${arr.map(c => `<span class="chi
 
 /** Shared case-study hero + metadata + ownership. */
 export function caseHero(p, { label, title, sum, meta, media, own, badge = '', titleCls = '' }) {
+  const hl = HERO_LOGOS[p.slug];
   return `<header class="c-hero" data-tone="base">
     <div class="wrap">
       <nav class="c-hero__crumbs label" aria-label="Breadcrumb"><a href="#work">Work</a><span aria-hidden="true">/</span><span>${p.num}: ${p.name}</span></nav>
-      ${brandRow(p.slug)}
       <div class="grid c-hero__grid">
         <div class="c-hero__title">
           <span class="label label--accent">${label}</span>
           ${badge}
-          <h1 class="display ${titleCls}">${lines(title)}</h1>
+          ${hl && !hl.replace ? heroLogo(hl, .05) : ''}
+          ${hl && hl.replace
+            ? `<h1 class="c-hero__logo-title">${heroLogo(hl, .1)}</h1>`
+            : `<h1 class="display ${titleCls}">${lines(title)}</h1>`}
         </div>
         <p class="c-hero__sum rv" style="--d:.25s">${sum}</p>
       </div>

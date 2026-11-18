@@ -1008,11 +1008,11 @@ img.logo { display: block; height: var(--lh); width: auto; max-width: none; obje
   .ticker__track { animation-duration: 36s; }
 }
 
-/* Case-study hero: client / studio logos on white cards (work on every theme) */
-.c-brands { display: flex; flex-wrap: wrap; gap: 12px 28px; margin: 24px 0 clamp(28px, 3vw, 44px); padding: 0; list-style: none; }
-.c-brand { display: flex; align-items: center; gap: 12px; }
-.c-brand .label { color: var(--muted); }
-.c-brand__card { display: inline-flex; align-items: center; justify-content: center; min-height: 64px; padding: 10px 18px; background: #fff; border-radius: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08); }
+/* Case-study hero: client logo replaces (or sits above) the headline. Transparent PNGs, no card. */
+.c-hero__logo { display: block; }
+.c-hero__logo img { display: block; height: var(--logo-h); width: auto; max-width: 100%; object-fit: contain; object-position: left bottom; }
+.c-hero__logo-title { margin: 0; line-height: 0; }
+.c-hero__title > .c-hero__logo { margin-bottom: clamp(20px, 2.4vw, 32px); }
 
 /* Experience & education */
 .xp__logo, .edu__logo { margin-bottom: 14px; }
